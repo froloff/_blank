@@ -16,13 +16,6 @@ module.exports = {
     path: path.resolve(__dirname, '../public'),
     filename: 'scripts/app.js',
   },
-  resolve: {
-    alias: {
-      containers: path.resolve(__dirname, '../client/app/containers'),
-      components: path.resolve(__dirname, '../client/app/components'),
-    },
-    extensions: ['', '.js', '.jsx'],
-  },
   module: {
     loaders: [{
       test: /\.jsx?$/,
