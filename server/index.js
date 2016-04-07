@@ -1,19 +1,18 @@
-var path = require('path');
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
-if (process.env.NODE_ENV == 'development') {
-  var webpack = require('webpack');
-  var config = require('../config/webpack.development.js');
-  var compiler = webpack(config);
+if (process.env.NODE_ENV === 'development') {
+  const webpack = require('webpack');
+  const config = require('../config/webpack.development.js');
+  const compiler = webpack(config);
   app.use(require('webpack-dev-middleware')(compiler, {
-    publicPath: config.output.publicPath
+    publicPath: config.output.publicPath,
   }));
   app.use(require('webpack-hot-middleware')(compiler));
 }
 
 app.use(express.static('public'));
-app.listen(3000, 'localhost', function(err) {
+app.listen(3000, 'localhost', (err) => {
   if (err) {
     console.log(err);
     return;

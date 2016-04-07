@@ -1,36 +1,43 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
     app: [
       'webpack-hot-middleware/client',
-      path.resolve(__dirname, '../client/index.jsx')
-    ]
+      path.resolve(__dirname, '../client/index.jsx'),
+    ],
   },
   output: {
     path: path.resolve(__dirname, '../public'),
-    filename: 'scripts/app.js'
+    filename: 'scripts/app.js',
+  },
+  resolve: {
+    alias: {
+      containers: path.resolve(__dirname, '../client/app/containers'),
+      components: path.resolve(__dirname, '../client/app/components'),
+    },
+    extensions: ['', '.js', '.jsx'],
   },
   module: {
     loaders: [{
       test: /\.jsx?$/,
       include: path.resolve(__dirname, '../client/'),
-      loader: 'babel'
+      loader: 'babel',
     }, {
       test: /\.p?css$/,
-      loader: 'style!css!postcss'
-    }]
+      loader: 'style!css?modules!postcss',
+    }],
   },
   plugins: [
     new webpack.NoErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
   ],
-  postcss: function () {
+  postcss() {
     return [
-      require('postcss-import')({addDependencyTo: webpack}),
+      require('postcss-import')({ addDependencyTo: webpack }),
       require('postcss-url')(),
-      require('postcss-cssnext')()
+      require('postcss-cssnext')(),
     ];
-  }
+  },
 };

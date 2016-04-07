@@ -1,42 +1,54 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 
-var HtmlPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
     app: [
-      path.resolve(__dirname, '../client/index.jsx')
+      path.resolve(__dirname, '../client/index.jsx'),
     ],
-    vendors: ['react']
+    vendors: ['react'],
   },
   output: {
     path: path.resolve(__dirname, '../public'),
-    filename: 'scripts/app.js'
+    filename: 'scripts/app.js',
+  },
+  resolve: {
+    alias: {
+      containers: path.resolve(__dirname, '../client/app/containers'),
+      components: path.resolve(__dirname, '../client/app/components'),
+    },
+    extensions: ['', '.js', '.jsx'],
   },
   module: {
     loaders: [{
       test: /\.jsx?$/,
       include: path.resolve(__dirname, '../client/'),
-      loader: 'babel'
+      loader: 'babel',
     }, {
       test: /\.p?css$/,
-      loader: ExtractTextPlugin.extract('style', 'css!postcss')
-    }]
+      loader: ExtractTextPlugin.extract('style', 'css?modules!postcss'),
+    }],
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({compressor: {warnings: false}}),
+    new webpack.optimize.UglifyJsPlugin({ compressor: { warnings: false } }),
     new webpack.optimize.CommonsChunkPlugin('vendors', 'scripts/vendors.js'),
-    new HtmlPlugin({template: 'client/index.html'}),
-    new ExtractTextPlugin('styles/app.css')
+    new HtmlPlugin({ template: 'client/index.html' }),
+    new ExtractTextPlugin('styles/app.css'),
+    new CopyPlugin([{
+      from: 'client/assets',
+      to: 'assets',
+    }]),
   ],
-  postcss: function () {
+  postcss() {
     return [
-      require('postcss-import')({addDependencyTo: webpack}),
+      require('postcss-import')({ addDependencyTo: webpack }),
       require('postcss-url')(),
-      require('postcss-cssnext')()
+      require('postcss-cssnext')(),
     ];
-  }
+  },
 };
