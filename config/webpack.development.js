@@ -19,18 +19,13 @@ module.exports = {
     extensions: ['', '.js', '.jsx'],
   },
   module: {
-    preLoaders: [{
-      test: /\.jsx?$/,
-      include: path.resolve(__dirname, '../client/'),
-      loader: 'eslint-loader',
-    }],
     loaders: [{
       test: /\.jsx?$/,
       include: path.resolve(__dirname, '../client/'),
       loader: 'babel',
     }, {
       test: /\.p?css$/,
-      loader: 'style!css?modules!postcss',
+      loader: 'style!css?modules&localIdentName=[name]__[local]___[hash:base64:5]!postcss',
     }],
   },
   plugins: [

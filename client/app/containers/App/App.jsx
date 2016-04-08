@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import 'normalize.css';
-import './App.pcss';
+import styles from './App.pcss';
 
 import User from 'app/components/User/User';
 import Page from 'app/components/Page/Page';
@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     const { user, page } = this.props;
     return (
-      <div className="App">
+      <div className={styles.App}>
         <User name={user.name} />
         <Page year={page.year} />
       </div>

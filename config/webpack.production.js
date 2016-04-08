@@ -34,7 +34,7 @@ module.exports = {
       loader: 'babel',
     }, {
       test: /\.p?css$/,
-      loader: ExtractTextPlugin.extract('style', 'css?modules!postcss'),
+      loader: 'style!css?modules&localIdentName=[name]__[local]___[hash:base64:5]!postcss',
     }],
   },
   plugins: [
@@ -50,6 +50,9 @@ module.exports = {
       to: 'assets',
     }]),
   ],
+  eslint: {
+    failOnError: true,
+  },
   postcss() {
     return [
       require('postcss-import')({ addDependencyTo: webpack }),
