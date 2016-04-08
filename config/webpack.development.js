@@ -12,6 +12,12 @@ module.exports = {
     path: path.resolve(__dirname, '../public'),
     filename: 'scripts/app.js',
   },
+  resolve: {
+    alias: {
+      app: path.resolve(__dirname, '../client/app'),
+    },
+    extensions: ['', '.js', '.jsx'],
+  },
   module: {
     loaders: [{
       test: /\.jsx?$/,

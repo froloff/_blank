@@ -1,8 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import App from './containers/App/App.jsx';
-import configureStore from './store/configureStore';
+
+import App from 'app/containers/App/App';
+import configureStore from 'app/store/configureStore';
 
 const store = configureStore();
 

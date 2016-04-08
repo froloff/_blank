@@ -10,11 +10,17 @@ module.exports = {
     app: [
       path.resolve(__dirname, '../client/index.jsx'),
     ],
-    vendors: ['react'],
+    vendors: ['react', 'react-dom', 'react-redux', 'redux'],
   },
   output: {
     path: path.resolve(__dirname, '../public'),
     filename: 'scripts/app.js',
+  },
+  resolve: {
+    alias: {
+      app: path.resolve(__dirname, '../client/app'),
+    },
+    extensions: ['', '.js', '.jsx'],
   },
   module: {
     loaders: [{
@@ -27,6 +33,8 @@ module.exports = {
     }],
   },
   plugins: [
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"production"' }),
+    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ compressor: { warnings: false } }),
     new webpack.optimize.CommonsChunkPlugin('vendors', 'scripts/vendors.js'),
