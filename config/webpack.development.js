@@ -19,6 +19,11 @@ module.exports = {
     extensions: ['', '.js', '.jsx'],
   },
   module: {
+    preLoaders: [{
+      test: /\.jsx?$/,
+      include: path.resolve(__dirname, '../client/'),
+      loader: 'eslint-loader',
+    }],
     loaders: [{
       test: /\.jsx?$/,
       include: path.resolve(__dirname, '../client/'),

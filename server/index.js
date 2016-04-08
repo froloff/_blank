@@ -6,7 +6,11 @@ if (process.env.NODE_ENV === 'development') {
   const config = require('../config/webpack.development.js');
   const compiler = webpack(config);
   app.use(require('webpack-dev-middleware')(compiler, {
+    noInfo: true,
     publicPath: config.output.publicPath,
+    stats: {
+      colors: true,
+    },
   }));
   app.use(require('webpack-hot-middleware')(compiler));
 }
