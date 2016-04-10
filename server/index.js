@@ -19,8 +19,8 @@ app.use(express.static('public'));
 const port = 3000;
 app.listen(port, 'localhost', (error) => {
   if (error) {
-    console.log(error);
+    console.log(error); // eslint-disable-line
   } else {
-    console.info(`==> 🌎  Listening on port ${port}. Open up http://localhost:${port}/ in your browser.`);
+    console.info(`==> 🌎  Listening on port ${port}. Open up http://localhost:${port}/ in your browser.`); // eslint-disable-line
   }
 });
