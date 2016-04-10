@@ -16,9 +16,11 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(express.static('public'));
-app.listen(3000, 'localhost', (err) => {
-  if (err) {
-    console.log(err);
-    return;
+const port = 3000;
+app.listen(port, 'localhost', (error) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.info(`==> 🌎  Listening on port ${port}. Open up http://localhost:${port}/ in your browser.`);
   }
 });
