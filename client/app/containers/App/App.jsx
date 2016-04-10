@@ -1,19 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import 'normalize.css';
 import styles from './App.pcss';
 
-import User from 'app/components/User/User';
-import Page from 'app/components/Page/Page';
+import Counter from 'app/components/Counter/Counter';
 
 class App extends Component {
   render() {
-    const { user, page } = this.props;
+    const { counter } = this.props;
     return (
       <div className={styles.App}>
-        <User name={user.name} />
-        <Page year={page.year} />
+        <Counter value={counter.value} />
       </div>
     );
   }
@@ -21,14 +18,12 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    page: state.page,
-    user: state.user,
+    counter: state.counter,
   };
 }
 
 App.propTypes = {
-  page: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
+  counter: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps)(App);
