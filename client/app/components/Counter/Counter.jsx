@@ -5,7 +5,6 @@ import styles from './Counter.pcss';
 export default class Counter extends Component {
   render() {
     const { value } = this.props;
-    console.log(this.props);
     return (
       <p className={styles.counter}>{value}</p>
     );
