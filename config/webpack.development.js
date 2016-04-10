@@ -1,6 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const HtmlPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+
 module.exports = {
   entry: {
     app: [
@@ -32,6 +35,11 @@ module.exports = {
     new webpack.DefinePlugin({ 'process.env.NODE_ENV': `"${process.env.NODE_ENV}"` }),
     new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new HtmlPlugin({ template: 'client/index.html' }),
+    new CopyPlugin([{
+      from: 'client/assets',
+      to: 'assets',
+    }]),
   ],
   postcss() {
     return [

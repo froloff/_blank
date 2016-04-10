@@ -7,11 +7,13 @@
     "url": "https://github.com/froloff/_blank.git"
   },
   "scripts": {
-    "start": "NODE_ENV=development node server/index.js",
-    "start:production": "NODE_ENV=production node server/index.js",
-    "clean": "rimraf public",
-    "build": "npm run clean && npm run build:webpack",
-    "build:webpack": "NODE_ENV=production webpack --config config/webpack.production.js"
+    "start": "npm run start:development",
+    "start:development": "npm run build:development && NODE_ENV=development node server/index.js",
+    "start:production": "npm run build:production && NODE_ENV=production node server/index.js",
+    "build": "npm run build:production",
+    "build:development": "npm run clean && NODE_ENV=development webpack --config config/webpack.development.js",
+    "build:production": "npm run clean && NODE_ENV=production webpack --config config/webpack.production.js",
+    "clean": "rimraf public"
   },
   "author": "Leonid Frolov <leonid@froloff.me> (https://github.com/froloff)",
   "license": "CC0-1.0",
