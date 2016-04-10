@@ -34,7 +34,10 @@ module.exports = {
       loader: 'babel',
     }, {
       test: /\.p?css$/,
-      loader: 'style!css?modules&localIdentName=[hash:base64:5]!postcss',
+      loader: ExtractTextPlugin.extract(
+        'style',
+        '!css?modules&localIdentName=[hash:base64:5]!postcss'
+      ),
     }],
   },
   plugins: [
