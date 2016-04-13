@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-
 const HtmlPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
@@ -13,6 +12,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '../public'),
+    publicPath: '/',
     filename: 'scripts/app.js',
   },
   resolve: {
