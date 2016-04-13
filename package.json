@@ -53,18 +53,5 @@
     "webpack": "^1.12.13",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-hot-middleware": "^2.7.0"
-  },
-  "babel": {
-    "presets": [
-      "react",
-      "es2015"
-    ],
-    "env": {
-      "development": {
-        "presets": [
-          "react-hmre"
-        ]
-      }
-    }
   }
 }
