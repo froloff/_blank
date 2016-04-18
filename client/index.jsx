@@ -8,6 +8,9 @@ import 'normalize.css';
 import './styles/main.pcss';
 
 import App from 'app/containers/App/App';
+import HomePage from 'app/pages/Home/Home';
+import NotFoundPage from 'app/pages/NotFound/NotFound';
+
 import configureStore from 'app/store/configureStore';
 
 const store = configureStore();
@@ -16,7 +19,10 @@ const history = syncHistoryWithStore(browserHistory, store);
 render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={App} />
+      <Route component={App}>
+        <Route path="/" component={HomePage} />
+        <Route path="*" component={NotFoundPage} />
+      </Route>
     </Router>
   </Provider>,
   document.getElementById('root')
