@@ -1,19 +1,11 @@
 import { DECREMENT, INCREMENT } from 'app/constants/Counter';
 
-const initialState = {
-  value: 0,
-};
-
-export default function counter(state = initialState, action) {
+export default function counter(state = 0, action) {
   switch (action.type) {
     case DECREMENT:
-      return Object.assign({}, state, {
-        value: state.value - 1,
-      });
+      return state - 1;
     case INCREMENT:
-      return Object.assign({}, state, {
-        value: state.value + 1,
-      });
+      return state + 1;
     default:
       return state;
   }

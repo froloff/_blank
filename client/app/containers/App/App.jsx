@@ -13,7 +13,7 @@ class App extends Component {
     const { increment, decrement } = this.props.counterActions;
     return (
       <div className={styles.App}>
-        <Counter value={counter.value} increment={increment} decrement={decrement} />
+        <Counter value={counter} increment={increment} decrement={decrement} />
       </div>
     );
   }
@@ -32,7 +32,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 App.propTypes = {
-  counter: PropTypes.object.isRequired,
+  counter: PropTypes.number.isRequired,
   counterActions: PropTypes.object.isRequired,
 };
 
