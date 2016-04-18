@@ -1,15 +1,18 @@
 import React, { Component, PropTypes } from 'react';
-
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import styles from './Counter.pcss';
+import * as actions from 'app/actions/CounterActions';
 
-export default class Counter extends Component {
+class Counter extends Component {
   render() {
     const { value } = this.props;
+    const { decrement, increment } = this.props.actions;
     return (
       <div className={styles.counter}>
-        <button className={styles.button} onClick={this.props.decrement}>-</button>
+        <button className={styles.button} onClick={decrement}>-</button>
         <span className={styles.value}>{value}</span>
-        <button className={styles.button} onClick={this.props.increment}>+</button>
+        <button className={styles.button} onClick={increment}>+</button>
       </div>
     );
   }
@@ -17,6 +20,19 @@ export default class Counter extends Component {
 
 Counter.propTypes = {
   value: PropTypes.number.isRequired,
-  decrement: PropTypes.func.isRequired,
-  increment: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
 };
+
+function mapStateToProps(state) {
+  return {
+    value: state.counter,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
