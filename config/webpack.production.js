@@ -9,7 +9,7 @@ module.exports = {
     app: [
       path.resolve(__dirname, '../client/index.jsx'),
     ],
-    vendors: ['react', 'react-dom', 'react-redux', 'redux', 'redux-thunk', 'redux-promise'],
+    vendors: ['react', 'react-dom', 'react-redux', 'redux', 'redux-thunk'],
   },
   output: {
     path: path.resolve(__dirname, '../public'),

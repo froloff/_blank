@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlPlugin = require('html-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -29,6 +28,9 @@ module.exports = {
     }, {
       test: /\.p?css$/,
       loader: 'style!css?modules&localIdentName=[name]__[local]___[hash:base64:5]!postcss',
+    }, {
+      test: /\.(ttf|eot|woff|woff2|svg)$/,
+      loader: 'file?name=fonts/[name].[ext]',
     }],
   },
   plugins: [
@@ -36,10 +38,6 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlPlugin({ template: 'client/index.html' }),
-    new CopyPlugin([{
-      from: 'client/assets',
-      to: 'assets',
-    }]),
   ],
   postcss() {
     return [
