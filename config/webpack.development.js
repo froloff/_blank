@@ -5,6 +5,7 @@ const HtmlPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: {
     app: [
+      'react-hot-loader/patch',
       'webpack-hot-middleware/client',
       path.resolve(__dirname, '../client/index.jsx'),
     ],
@@ -34,7 +35,7 @@ module.exports = {
     }],
   },
   plugins: [
-    new webpack.DefinePlugin({ 'process.env.NODE_ENV': `"${process.env.NODE_ENV}"` }),
+    new webpack.EnvironmentPlugin(['NODE_ENV']),
     new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlPlugin({ template: 'client/index.html' }),
