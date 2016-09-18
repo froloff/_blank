@@ -5,6 +5,11 @@ import styles from './Counter.pcss';
 import * as actions from '../../actions/CounterActions';
 
 class Counter extends Component {
+  static propTypes = {
+    value: PropTypes.number.isRequired,
+    actions: PropTypes.object.isRequired,
+  }
+
   render() {
     const { value } = this.props;
     const { decrement, increment } = this.props.actions;
@@ -17,11 +22,6 @@ class Counter extends Component {
     );
   }
 }
-
-Counter.propTypes = {
-  value: PropTypes.number.isRequired,
-  actions: PropTypes.object.isRequired,
-};
 
 function mapStateToProps(state) {
   return {
