@@ -17,7 +17,7 @@ module.exports = {
       'redux-thunk',
     ],
     app: [
-      path.resolve(__dirname, '../client/index'),
+      path.resolve(__dirname, '../src/index'),
     ],
   },
   output: {
@@ -27,7 +27,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      app: path.resolve(__dirname, '../client/app'),
+      app: path.resolve(__dirname, '../src/app'),
     },
     extensions: ['', '.js', '.jsx'],
   },
@@ -48,17 +48,15 @@ module.exports = {
     }],
   },
 
-  // todo: dont forget about iframe
   plugins: [
     new webpack.EnvironmentPlugin(['NODE_ENV']),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({ compressor: { warnings: false } }),
     new webpack.optimize.CommonsChunkPlugin({ names: ['components', 'vendor'], minChunks: Infinity }),
     new HtmlPlugin({
-      template: path.resolve(__dirname, '../client/index.html'),
+      template: path.resolve(__dirname, '../src/index.html'),
       chunksSortMode: 'dependency',
     }),
-
   ],
   postcss() {
     return [
