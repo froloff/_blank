@@ -2,9 +2,8 @@
   "extends": "airbnb",
   "rules": {
     "global-require": 0,
-    "import/no-unresolved": 0,
-    "react/jsx-first-prop-new-line": 0,
-    "react/prop-types": 0,
+    "import/newline-after-import": 0,
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     "react/prefer-stateless-function": 0
   }
 }

@@ -5,15 +5,16 @@ const HtmlPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: {
     app: [
-      'react-hot-loader/patch',
-      'webpack-hot-middleware/client',
-      path.resolve(__dirname, '../client/index.jsx'),
+      'babel-polyfill',
+      'whatwg-fetch',
+      'webpack-hot-middleware/client?reload=true',
+      path.resolve(__dirname, '../client/index'),
     ],
   },
   output: {
-    path: path.resolve(__dirname, '../public'),
+    path: path.resolve(__dirname, '../build'),
     publicPath: '/',
-    filename: 'scripts/app.js',
+    filename: '[name].js',
   },
   resolve: {
     alias: {
@@ -24,27 +25,35 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      include: path.resolve(__dirname, '../client/'),
       loader: 'babel',
+      exclude: /node_modules/,
     }, {
       test: /\.p?css$/,
-      loader: 'style!css?modules&localIdentName=[name]__[local]___[hash:base64:5]!postcss',
+      loader: 'style!css?modules&localIdentName=[name]_[local]_[hash:base64:8]!postcss',
     }, {
-      test: /\.(ttf|eot|woff|woff2|svg)$/,
-      loader: 'file?name=fonts/[name].[ext]',
+      test: /\.(woff|woff2|ttf|png|jpg)$/,
+      loader: 'url',
+    }, {
+      test: /\.svg$/,
+      loader: 'babel!svg-react',
     }],
   },
   plugins: [
     new webpack.EnvironmentPlugin(['NODE_ENV']),
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new HtmlPlugin({ template: 'client/index.html' }),
+    new HtmlPlugin({
+      template: path.resolve(__dirname, '../client/index.html'),
+      chunksSortMode: 'dependency',
+    }),
   ],
   postcss() {
     return [
       require('postcss-import')({ addDependencyTo: webpack }),
-      require('postcss-url')(),
-      require('postcss-cssnext')({ browsers: ['last 2 versions', 'ie 11'] }),
+      require('postcss-url')({ url: 'inline' }),
+      require('postcss-cssnext')({ browsers: ['last 2 versions', 'ie >= 9', 'ios >= 8'] }),
     ];
   },
+  devtool: 'source-map',
 };

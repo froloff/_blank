@@ -1,20 +1,29 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: [
-      path.resolve(__dirname, '../client/index.jsx'),
+    vendor: [
+      'babel-polyfill',
+      'whatwg-fetch',
+      'classnames',
+      'react',
+      'react-dom',
+      'react-redux',
+      'react-router',
+      'react-router-redux',
+      'redux',
+      'redux-thunk',
     ],
-    vendors: ['react', 'react-dom', 'react-redux', 'redux', 'redux-thunk'],
+    app: [
+      path.resolve(__dirname, '../client/index'),
+    ],
   },
   output: {
-    path: path.resolve(__dirname, '../public'),
+    path: path.resolve(__dirname, '../build'),
     publicPath: '/',
-    filename: 'scripts/app.js',
+    filename: '[name].js',
   },
   resolve: {
     alias: {
@@ -23,44 +32,44 @@ module.exports = {
     extensions: ['', '.js', '.jsx'],
   },
   module: {
-    preLoaders: [{
-      test: /\.jsx?$/,
-      include: path.resolve(__dirname, '../client/'),
-      loader: 'eslint-loader',
-    }],
     loaders: [{
       test: /\.jsx?$/,
-      include: path.resolve(__dirname, '../client/'),
       loader: 'babel',
+      exclude: /node_modules/,
     }, {
       test: /\.p?css$/,
-      loader: ExtractTextPlugin.extract(
-        'style',
-        '!css?modules&localIdentName=[hash:base64:5]!postcss'
-      ),
+      loader: 'style!css?modules&localIdentName=[hash:base64:8]!postcss',
+    }, {
+      test: /\.(woff|woff2|ttf|png|jpg)$/,
+      loader: 'url?limit=10000&name=assets/[hash:base64:8].[ext]',
+    }, {
+      test: /\.svg$/,
+      loader: 'babel!svg-react',
     }],
   },
+
+  // todo: dont forget about iframe
   plugins: [
     new webpack.EnvironmentPlugin(['NODE_ENV']),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ compressor: { warnings: false } }),
-    new webpack.optimize.CommonsChunkPlugin('vendors', 'scripts/vendors.js'),
-    new HtmlPlugin({ template: 'client/index.html' }),
-    new ExtractTextPlugin('styles/app.css'),
-    new CopyPlugin([{
-      from: 'client/assets',
-      to: 'assets',
-    }]),
+    new webpack.optimize.CommonsChunkPlugin({ names: ['components', 'vendor'], minChunks: Infinity }),
+    new HtmlPlugin({
+      template: path.resolve(__dirname, '../client/index.html'),
+      chunksSortMode: 'dependency',
+    }),
+
   ],
-  eslint: {
-    failOnError: true,
-  },
   postcss() {
     return [
       require('postcss-import')({ addDependencyTo: webpack }),
-      require('postcss-url')(),
-      require('postcss-cssnext')({ browsers: ['last 2 versions', 'ie 11'] }),
+      require('postcss-url')({ url: 'inline' }),
+      require('postcss-cssnext')({ browsers: ['last 2 versions', 'ie >= 9', 'ios >= 8'] }),
     ];
+  },
+  svgoConfig: {
+    plugins: [
+      { removeTitle: true },
+    ],
   },
 };

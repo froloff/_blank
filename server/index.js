@@ -1,31 +1,33 @@
 const path = require('path');
 const express = require('express');
+
 const app = express();
 
 if (process.env.NODE_ENV === 'development') {
   const webpack = require('webpack');
-  const config = require('../config/webpack.development.js');
+  const config = require('../config/webpack.development');
   const compiler = webpack(config);
-  app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
+  const middleware = require('webpack-dev-middleware')(compiler, {
     publicPath: config.output.publicPath,
     stats: {
       colors: true,
+      chunks: false,
     },
-  }));
+  });
+
+  app.use(middleware);
   app.use(require('webpack-hot-middleware')(compiler));
+  app.get('*', (req, res) => {
+    res.end(middleware.fileSystem.readFileSync(path.join(config.output.path, 'index.html')));
+  });
+} else {
+  app.use(express.static(path.resolve(__dirname, '../build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../build/index.html'));
+  });
 }
 
-app.use(express.static('public'));
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../public/index.html'));
-});
-
-const port = 3000;
-app.listen(port, 'localhost', (error) => {
-  if (error) {
-    console.log(error); // eslint-disable-line
-  } else {
-    console.info(`==> 🌎  Listening on port ${port}. Open up http://localhost:${port}/ in your browser.`); // eslint-disable-line
-  }
+app.set('port', process.env.PORT || 8080);
+app.listen(app.get('port'), () => {
+  console.log('Express server listening on port ' + app.get('port')); // eslint-disable-line
 });
