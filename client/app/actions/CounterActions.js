@@ -1,4 +1,4 @@
-import { DECREMENT, INCREMENT } from 'app/constants/Counter';
+import { DECREMENT, INCREMENT } from '../constants/Counter';
 
 // Synchronous Action
 export function decrement() {
@@ -7,13 +7,9 @@ export function decrement() {
   };
 }
 
-// Asynchronous Action
+// Another Synchronous Action
 export function increment() {
-  return (dispatch) => {
-    setTimeout(() => {
-      dispatch({
-        type: INCREMENT,
-      });
-    }, 1000);
+  return {
+    type: INCREMENT,
   };
 }
