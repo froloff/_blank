@@ -7,7 +7,7 @@ export default class NotFoundPage extends Component {
     return (
       <div className={styles.page}>
         <h1>404 :(</h1>
-        <h2><Link to="/">Home /</Link></h2>
+        <h2><Link to="/">go Home /</Link></h2>
       </div>
     );
   }
