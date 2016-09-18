@@ -4,8 +4,7 @@ import { Router, Route, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import 'normalize.css';
-import './styles/main.pcss';
+import './styles';
 
 import App from 'app/containers/App/App';
 import HomePage from 'app/pages/Home/Home';
