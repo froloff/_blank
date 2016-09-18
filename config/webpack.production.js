@@ -17,7 +17,7 @@ module.exports = {
       'redux-thunk',
     ],
     app: [
-      path.resolve(__dirname, '../src/index'),
+      path.resolve(__dirname, '../client/index'),
     ],
   },
   output: {
@@ -51,7 +51,7 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({ compressor: { warnings: false } }),
     new webpack.optimize.CommonsChunkPlugin({ names: ['components', 'vendor'], minChunks: Infinity }),
     new HtmlPlugin({
-      template: path.resolve(__dirname, '../src/index.html'),
+      template: path.resolve(__dirname, '../client/index.html'),
       chunksSortMode: 'dependency',
     }),
   ],

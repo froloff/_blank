@@ -8,7 +8,7 @@ module.exports = {
       'babel-polyfill',
       'whatwg-fetch',
       'webpack-hot-middleware/client?reload=true',
-      path.resolve(__dirname, '../src/index'),
+      path.resolve(__dirname, '../client/index'),
     ],
   },
   output: {
@@ -41,7 +41,7 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlPlugin({
-      template: path.resolve(__dirname, '../src/index.html'),
+      template: path.resolve(__dirname, '../client/index.html'),
       chunksSortMode: 'dependency',
     }),
   ],
