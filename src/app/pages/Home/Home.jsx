@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import styles from './Home.pcss';
-import Counter from 'app/components/Counter/Counter';
+import Counter from '../../components/Counter/Counter';
 
 export default class HomePage extends Component {
   render() {

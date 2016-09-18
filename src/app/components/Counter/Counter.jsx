@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import styles from './Counter.pcss';
-import * as actions from 'app/actions/CounterActions';
+import * as actions from '../../actions/CounterActions';
 
 class Counter extends Component {
   render() {

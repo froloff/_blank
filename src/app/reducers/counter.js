@@ -1,4 +1,4 @@
-import { DECREMENT, INCREMENT } from 'app/constants/Counter';
+import { DECREMENT, INCREMENT } from '../constants/Counter';
 
 export default function counter(state = 0, action) {
   switch (action.type) {

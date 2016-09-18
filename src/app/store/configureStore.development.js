@@ -2,7 +2,7 @@ import { applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 
-import rootReducer from 'app/reducers';
+import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
   const logger = createLogger();

@@ -17,9 +17,6 @@ module.exports = {
     filename: '[name].js',
   },
   resolve: {
-    alias: {
-      app: path.resolve(__dirname, '../src/app'),
-    },
     extensions: ['', '.js', '.jsx'],
   },
   module: {
