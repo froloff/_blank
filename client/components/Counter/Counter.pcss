@@ -1,0 +1,32 @@
+.component {
+  font-size: 60px;
+  margin: 0.5em;
+}
+
+.value {
+  position: relative;
+  display: inline-block;
+  width: 1.75em;
+  vertical-align: middle;
+  text-align: center;
+  bottom: -0.1em;
+}
+
+.button {
+  vertical-align: middle;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 0.75em;
+  transition: color 0.2s ease-out;
+
+  &:first-child:hover {
+    cursor: pointer;
+    color: red;
+  }
+
+  &:last-child:hover {
+    cursor: pointer;
+    color: green;
+  }
+}

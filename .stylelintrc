@@ -1,0 +1,9 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "block-no-empty": null,
+    "no-empty-source": null,
+    "property-no-unknown": [true, { ignoreProperties: ["composes"] }],
+    "selector-pseudo-class-no-unknown": [true, { ignorePseudoClasses: ["global"] }]
+  }
+}
