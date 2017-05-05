@@ -9,7 +9,11 @@
   "scripts": {
     "start": "NODE_ENV=development nodemon --watch server server/index.js",
     "build": "rimraf build && NODE_ENV=production webpack -p",
-    "debug": "NODE_ENV=development node-nightly --inspect --debug-brk server/index.js"
+    "debug": "NODE_ENV=development node-nightly --inspect --debug-brk server/index.js",
+    "eslint": "eslint --cache --ext .jsx,.js --ignore-path .gitignore ./",
+    "stylelint": "stylelint --cache client/**/*.pcss",
+    "lint": "yarn run eslint && yarn run stylelint",
+    "precommit": "yarn run lint"
   },
   "author": "Leonid Frolov <leonid@froloff.me> (https://github.com/froloff)",
   "license": "CC0-1.0",
@@ -44,6 +48,7 @@
     "eslint-plugin-react": "^6.10.3",
     "file-loader": "^0.11.1",
     "html-webpack-plugin": "^2.28.0",
+    "husky": "^0.13.3",
     "normalize.css": "^7.0.0",
     "postcss-cssnext": "^2.10.0",
     "postcss-import": "^9.1.0",
