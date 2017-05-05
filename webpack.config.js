@@ -17,18 +17,11 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, './build'),
-    // publicPath: '/',
   },
 
   resolve: {
     extensions: ['.js', '.jsx'],
-    alias: {
-      actions: path.resolve(__dirname, './client/actions'),
-      components: path.resolve(__dirname, './client/components'),
-      constants: path.resolve(__dirname, './client/constants'),
-      containers: path.resolve(__dirname, './client/containers'),
-      pages: path.resolve(__dirname, './client/pages'),
-    },
+    modules: ['node_modules', 'client'],
   },
 
   module: {
