@@ -26,7 +26,7 @@ class Counter extends Component {
     const { decrement, increment } = this.props.actions;
     return (
       <div className={cx('component', className)}>
-        <button className={cx('button')} onClick={decrement}>-</button>
+        <button className={cx('button')} onClick={decrement}>–</button>
         <span className={cx('value')}>{value}</span>
         <button className={cx('button')} onClick={increment}>+</button>
       </div>
