@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
-import styles from './NotFound.pcss';
+import styles from './styles.pcss';
 
 const cx = classNames.bind(styles);
 

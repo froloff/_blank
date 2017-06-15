@@ -1,13 +1,11 @@
-// import axios from 'axios';
-
-import * as types from 'constants/Actions';
+import { DECREMENT, INCREMENT } from './constants';
 
 // Asynchronous Action
 export function decrement() {
   return (dispatch) => {
     setTimeout(() => {
       dispatch({
-        type: types.COUNTER_DECREMENT,
+        type: DECREMENT,
       });
     });
   };
@@ -16,6 +14,6 @@ export function decrement() {
 // Synchronous Action
 export function increment() {
   return {
-    type: types.COUNTER_INCREMENT,
+    type: INCREMENT,
   };
 }

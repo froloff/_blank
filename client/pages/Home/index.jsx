@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import classNames from 'classnames/bind';
-import { Counter, HelloWorld } from 'components';
 
-import styles from './Home.pcss';
+import { HelloWorld } from 'components';
+import { Counter } from 'containers';
+
+import styles from './styles.pcss';
 
 const cx = classNames.bind(styles);
 

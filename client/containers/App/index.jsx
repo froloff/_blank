@@ -7,7 +7,7 @@ import {
   NotFoundPage,
 } from 'pages';
 
-import styles from './App.pcss';
+import styles from './styles.pcss';
 
 const cx = classNames.bind(styles);
 

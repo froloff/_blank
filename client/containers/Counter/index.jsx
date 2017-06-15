@@ -4,9 +4,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 
-import * as actions from 'actions';
-
-import styles from './Counter.pcss';
+import * as actions from './actions';
+import styles from './styles.pcss';
 
 const cx = classNames.bind(styles);
 
