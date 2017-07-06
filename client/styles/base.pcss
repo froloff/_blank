@@ -10,11 +10,18 @@ textarea {
   color: #333;
 }
 
-body {
-  margin: 0;
-  font: 400 14px/1.4 'Fira Code';
+html {
+  font: 400 16px/1.4 'Fira Code';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+}
+
+body {
+  margin: 0;
 }
 
 iframe {
