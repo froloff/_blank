@@ -1,17 +1,10 @@
 const path = require('path');
 const express = require('express');
 
-const PRODUCTION = process.env.NODE_ENV === 'production';
+const DEVELOPMENT = process.env.NODE_ENV === 'development';
 
 module.exports = (app) => {
-  if (PRODUCTION) {
-    app.use(express.static(path.resolve(__dirname, '../build')));
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, '../build/index.html'));
-    });
-  }
-
-  if (!PRODUCTION) {
+  if (DEVELOPMENT) {
     const webpack = require('webpack');
     const config = require('../webpack.config');
     const compiler = webpack(config);
@@ -31,6 +24,11 @@ module.exports = (app) => {
       const indexPath = path.join(config.output.path, 'index.html');
       const indexFile = middleware.fileSystem.readFileSync(indexPath);
       res.end(indexFile);
+    });
+  } else {
+    app.use(express.static(path.resolve(__dirname, '../build')));
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, '../build/index.html'));
     });
   }
 };

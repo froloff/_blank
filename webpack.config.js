@@ -4,15 +4,15 @@ const HtmlPlugin = require('html-webpack-plugin');
 const VisualizerPlugin = require('webpack-visualizer-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const PRODUCTION = process.env.NODE_ENV === 'production';
+const DEVELOPMENT = process.env.NODE_ENV === 'development';
 
 module.exports = {
-  entry: PRODUCTION
+  entry: DEVELOPMENT
     ? [
+      'webpack-hot-middleware/client?reload=true',
       path.resolve(__dirname, './client/index'),
     ]
     : [
-      'webpack-hot-middleware/client?reload=true',
       path.resolve(__dirname, './client/index'),
     ],
   output: {
@@ -54,7 +54,7 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: PRODUCTION ? 16384 : 0,
+              limit: DEVELOPMENT ? 0 : 16384,
               name: 'assets/[hash:base64:10].[ext]',
             },
           },
@@ -66,7 +66,7 @@ module.exports = {
           { loader: 'babel-loader' },
           {
             loader: 'react-svg-loader',
-            query: {
+            options: {
               svgo: {
                 plugins: [{ cleanupIDs: false }],
               },
@@ -76,18 +76,8 @@ module.exports = {
       },
     ],
   },
-  plugins: PRODUCTION
+  plugins: DEVELOPMENT
     ? [
-      new webpack.EnvironmentPlugin(['NODE_ENV']),
-      new webpack.optimize.ModuleConcatenationPlugin(),
-      new ExtractTextPlugin('styles.css'),
-      new HtmlPlugin({
-        template: path.resolve(__dirname, './client/index.html'),
-        chunksSortMode: 'dependency',
-      }),
-      new VisualizerPlugin(),
-    ]
-    : [
       new webpack.EnvironmentPlugin(['NODE_ENV']),
       new webpack.NoEmitOnErrorsPlugin(),
       new webpack.HotModuleReplacementPlugin(),
@@ -96,6 +86,21 @@ module.exports = {
         template: path.resolve(__dirname, './client/index.html'),
         chunksSortMode: 'dependency',
       }),
+    ]
+    : [
+      new webpack.EnvironmentPlugin(['NODE_ENV']),
+      new webpack.optimize.ModuleConcatenationPlugin(),
+      new ExtractTextPlugin('styles.css'),
+      new HtmlPlugin({
+        template: path.resolve(__dirname, './client/index.html'),
+        chunksSortMode: 'dependency',
+      }),
+      new VisualizerPlugin(),
     ],
-  devtool: PRODUCTION ? false : 'source-map',
+  devtool: DEVELOPMENT ? 'source-map-eval' : 'source-map',
+  stats: {
+    color: true,
+    chunks: false,
+    children: false,
+  },
 };
