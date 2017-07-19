@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "yarn build && node server/index.js",
-    "dev": "NODE_ENV=development node server/index.js",
+    "dev": "NODE_ENV=development nodemon --watch server server/index.js",
     "build": "rimraf build && NODE_ENV=production webpack -p",
     "eslint": "eslint --cache --ext .jsx,.js --ignore-path .gitignore ./",
     "stylelint": "stylelint client/**/*.pcss --cache",
@@ -60,6 +60,7 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "husky": "^0.14.3",
+    "nodemon": "^1.11.0",
     "stylelint": "^8.0.0",
     "stylelint-config-standard": "^17.0.0",
     "webpack-dev-middleware": "^1.11.0",
