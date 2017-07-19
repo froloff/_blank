@@ -10,7 +10,7 @@ app.set('port', process.env.PORT || 3000);
 app.listen(app.get('port'), () => {
   console.log(`
     ------------------------------
-    🌍  GOTO https://localhost:${app.get('port')}
+    🌍  GOTO http://localhost:${app.get('port')}
     ------------------------------
   `);
 });

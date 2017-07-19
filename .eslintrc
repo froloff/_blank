@@ -14,11 +14,11 @@
     "import/prefer-default-export": 0,
     "import/no-extraneous-dependencies": 0,
     "import/no-unresolved": [2, { "ignore": [
-      "actions",
+      "assets",
       "components",
       "containers",
       "pages",
-      "constant"
+      "styles"
     ] }],
     "react/prefer-stateless-function": 0,
     "react/forbid-prop-types": 0,

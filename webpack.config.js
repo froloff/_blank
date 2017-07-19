@@ -15,14 +15,17 @@ module.exports = {
     : [
       path.resolve(__dirname, './client/index'),
     ],
+
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, './build'),
   },
+
   resolve: {
     extensions: ['.js', '.jsx'],
     modules: ['node_modules', 'client'],
   },
+
   module: {
     rules: [
       {
@@ -32,10 +35,12 @@ module.exports = {
           path.resolve(__dirname, './client'),
         ],
       },
+
       {
         test: /\.p?css$/,
-        use: ExtractTextPlugin.extract({
-          use: [
+        use: DEVELOPMENT
+          ? [
+            { loader: 'style-loader' },
             {
               loader: 'css-loader',
               options: {
@@ -45,9 +50,22 @@ module.exports = {
               },
             },
             { loader: 'postcss-loader' },
-          ],
-        }),
+          ]
+          : ExtractTextPlugin.extract({
+            use: [
+              {
+                loader: 'css-loader',
+                options: {
+                  importLoaders: 1,
+                  modules: true,
+                  localIdentName: '[folder]_[local]_[hash:base64:4]',
+                },
+              },
+              { loader: 'postcss-loader' },
+            ],
+          }),
       },
+
       {
         test: /\.(woff|woff2|ttf|png|jpg)$/,
         use: [
@@ -60,6 +78,7 @@ module.exports = {
           },
         ],
       },
+
       {
         test: /\.svg$/,
         use: [
@@ -76,12 +95,12 @@ module.exports = {
       },
     ],
   },
+
   plugins: DEVELOPMENT
     ? [
       new webpack.EnvironmentPlugin(['NODE_ENV']),
-      new webpack.NoEmitOnErrorsPlugin(),
       new webpack.HotModuleReplacementPlugin(),
-      new ExtractTextPlugin('styles.css'),
+      new webpack.NoEmitOnErrorsPlugin(),
       new HtmlPlugin({
         template: path.resolve(__dirname, './client/index.html'),
         chunksSortMode: 'dependency',
@@ -97,7 +116,9 @@ module.exports = {
       }),
       new VisualizerPlugin(),
     ],
+
   devtool: DEVELOPMENT ? 'source-map-eval' : 'source-map',
+
   stats: {
     color: true,
     chunks: false,

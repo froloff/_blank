@@ -10,12 +10,7 @@ module.exports = (app) => {
     const compiler = webpack(config);
     const middleware = require('webpack-dev-middleware')(compiler, {
       publicPath: config.output.publicPath,
-      stats: {
-        colors: true,
-        chunks: false,
-        children: false,
-        warnings: false,
-      },
+      stats: config.stats,
     });
 
     app.use(middleware);

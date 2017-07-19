@@ -1,6 +1,6 @@
 {
   "name": "_blank",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Yet another React-based web application starter kit",
   "repository": {
     "type": "git",
@@ -36,15 +36,14 @@
     "normalize.css": "^7.0.0",
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.6",
-    "postcss-mixins": "^6.0.1",
     "postcss-nested": "^2.0.4",
     "postcss-reporter": "^4.0.0",
-    "postcss-url": "^7.0.0",
+    "postcss-url": "^7.1.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
-    "react-router-dom": "^4.1.1",
+    "react-router-dom": "^4.1.2",
     "react-svg-loader": "^2.0.0-alpha.1",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
@@ -61,8 +60,8 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "husky": "^0.14.3",
-    "stylelint": "^7.13.0",
-    "stylelint-config-standard": "^16.0.0",
+    "stylelint": "^8.0.0",
+    "stylelint-config-standard": "^17.0.0",
     "webpack-dev-middleware": "^1.11.0",
     "webpack-hot-middleware": "^2.18.2"
   }
