@@ -1,0 +1,12 @@
+doctype html
+html(lang='en')
+  head
+    title _blank
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width')
+    link(href='/styles.css', rel='stylesheet')
+  body
+    #root!= html
+    script.
+      window.__PRELOADED_STATE__ = !{JSON.stringify(preloadedState).replace(/</g, '\\\u003c')}
+    script(src='/bundle.js')

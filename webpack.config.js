@@ -1,7 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlPlugin = require('html-webpack-plugin');
-const VisualizerPlugin = require('webpack-visualizer-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const DEVELOPMENT = process.env.NODE_ENV === 'development';
@@ -101,20 +99,11 @@ module.exports = {
       new webpack.EnvironmentPlugin(['NODE_ENV']),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoEmitOnErrorsPlugin(),
-      new HtmlPlugin({
-        template: path.resolve(__dirname, './client/index.html'),
-        chunksSortMode: 'dependency',
-      }),
     ]
     : [
       new webpack.EnvironmentPlugin(['NODE_ENV']),
       new webpack.optimize.ModuleConcatenationPlugin(),
       new ExtractTextPlugin('styles.css'),
-      new HtmlPlugin({
-        template: path.resolve(__dirname, './client/index.html'),
-        chunksSortMode: 'dependency',
-      }),
-      new VisualizerPlugin(),
     ],
 
   devtool: DEVELOPMENT ? 'source-map-eval' : 'source-map',
