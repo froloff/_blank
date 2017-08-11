@@ -9,7 +9,9 @@ export default function configureStore(initialState) {
     initialState,
     compose(
       applyMiddleware(thunk),
-      window.devToolsExtension ? window.devToolsExtension() : f => f,
+      typeof window === 'object' && window.devToolsExtension
+        ? window.devToolsExtension()
+        : f => f,
     ),
   );
 

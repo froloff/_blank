@@ -8,13 +8,21 @@ import { App } from 'containers';
 import './styles';
 import configureStore from './store';
 
-const store = configureStore();
+if (typeof window === 'object') {
+  const preloadedState = window.__PRELOADED_STATE__;
+  delete window.__PRELOADED_STATE__;
+  const store = configureStore(preloadedState);
 
-render(
-  <Provider store={store}>
-    <Router>
-      <Route component={App} />
-    </Router>
-  </Provider>,
-  document.getElementById('root'),
-);
+  render(
+    <Provider store={store}>
+      <Router>
+        <Route component={App} />
+      </Router>
+    </Provider>,
+    document.getElementById('root'),
+  );
+}
+
+if (typeof global === 'object') {
+  global.react = { configureStore, App };
+}
