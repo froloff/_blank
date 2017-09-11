@@ -70,7 +70,7 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: DEVELOPMENT ? 0 : 16384,
+              limit: DEVELOPMENT ? 0 : 4096,
               name: 'assets/[hash:base64:10].[ext]',
             },
           },
@@ -79,17 +79,7 @@ module.exports = {
 
       {
         test: /\.svg$/,
-        use: [
-          { loader: 'babel-loader' },
-          {
-            loader: 'react-svg-loader',
-            options: {
-              svgo: {
-                plugins: [{ cleanupIDs: false }],
-              },
-            },
-          },
-        ],
+        use: [{ loader: 'svg-react-loader' }],
       },
     ],
   },
