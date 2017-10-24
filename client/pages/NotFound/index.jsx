@@ -12,7 +12,9 @@ export default class NotFoundPage extends Component {
       <div className={cx('page')}>
         <h1 className={cx('heading')}>404 :(</h1>
         <h2 className={cx('message')}>
-          <Link to="/">go Home</Link>
+          <Link to="/">
+            go Home
+          </Link>
         </h2>
       </div>
     );

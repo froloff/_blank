@@ -1,7 +1,7 @@
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 const Router = require('react-router').StaticRouter;
-const Provider = require('react-redux').Provider;
+const { Provider } = require('react-redux');
 
 module.exports = (app) => {
   if (app.get('env') === 'production') {
@@ -17,7 +17,9 @@ module.exports = (app) => {
         React.createElement(
           Router,
           { location },
-          React.createElement(global.react.App, null)));
+          React.createElement(global.react.App, null),
+        ),
+      );
       return ReactDOMServer.renderToString(el);
     }
 

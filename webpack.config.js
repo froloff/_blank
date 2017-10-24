@@ -99,7 +99,7 @@ module.exports = {
   devtool: DEVELOPMENT ? 'source-map-eval' : 'source-map',
 
   stats: {
-    color: true,
+    colors: true,
     chunks: false,
     children: false,
   },
