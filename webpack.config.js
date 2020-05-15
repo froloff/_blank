@@ -1,8 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const DEVELOPMENT = process.env.NODE_ENV === 'development';
+const DEVELOPMENT = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   entry: DEVELOPMENT
@@ -36,32 +36,19 @@ module.exports = {
 
       {
         test: /\.p?css$/,
-        use: DEVELOPMENT
-          ? [
-            { loader: 'style-loader' },
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-                modules: true,
+        use: [
+          { loader: DEVELOPMENT ? 'style-loader' : MiniCssExtractPlugin.loader },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: {
                 localIdentName: '[folder]_[local]_[hash:base64:4]',
               },
             },
-            { loader: 'postcss-loader' },
-          ]
-          : ExtractTextPlugin.extract({
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  importLoaders: 1,
-                  modules: true,
-                  localIdentName: '[folder]_[local]_[hash:base64:4]',
-                },
-              },
-              { loader: 'postcss-loader' },
-            ],
-          }),
+          },
+          { loader: 'postcss-loader' },
+        ]
       },
 
       {
@@ -92,8 +79,7 @@ module.exports = {
     ]
     : [
       new webpack.EnvironmentPlugin(['NODE_ENV']),
-      new webpack.optimize.ModuleConcatenationPlugin(),
-      new ExtractTextPlugin('styles.css'),
+      new MiniCssExtractPlugin({filename: 'styles.css'}),
     ],
 
   devtool: DEVELOPMENT ? 'source-map-eval' : 'source-map',
@@ -103,4 +89,6 @@ module.exports = {
     chunks: false,
     children: false,
   },
+
+  mode: DEVELOPMENT ? 'development' : 'production',
 };

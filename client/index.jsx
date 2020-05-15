@@ -1,7 +1,9 @@
 import React from 'react';
-import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
+import { StaticRouter } from 'react-router';
+import { render } from 'react-dom';
+import { renderToString } from 'react-dom/server';
 
 import { App } from 'containers';
 
@@ -15,14 +17,23 @@ if (typeof window === 'object') {
 
   render(
     <Provider store={store}>
-      <Router>
+      <BrowserRouter>
         <Route component={App} />
-      </Router>
+      </BrowserRouter>
     </Provider>,
     document.getElementById('root'),
   );
 }
 
 if (typeof global === 'object') {
-  global.react = { configureStore, App };
+  global.prerenderApp = (state, location) => {
+    const store = configureStore(state);
+    return renderToString(
+      <Provider store={store}>
+        <StaticRouter location={location}>
+          <App />
+        </StaticRouter>
+      </Provider>
+    );
+  }
 }
