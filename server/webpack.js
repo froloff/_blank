@@ -9,7 +9,6 @@ module.exports = (app) => {
 
   app.use(devMiddleware(compiler, {
     publicPath: config.output.publicPath,
-    stats: config.stats,
   }));
   app.use(hotMiddleware(compiler));
   app.use(express.static(config.output.path));

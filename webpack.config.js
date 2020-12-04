@@ -82,7 +82,7 @@ module.exports = {
       new MiniCssExtractPlugin({filename: 'styles.css'}),
     ],
 
-  devtool: DEVELOPMENT ? 'source-map-eval' : 'source-map',
+  devtool: DEVELOPMENT ? 'eval-source-map' : 'source-map',
 
   stats: {
     colors: true,
